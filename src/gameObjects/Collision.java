@@ -4,7 +4,7 @@ package gameObjects;
  *
  * @author Charlie Hands
  */
-public abstract class Collision {
+public class Collision {
     protected float x,y,width,height;
     private final int id;
     private static int idBuilder = 0;
@@ -29,9 +29,7 @@ public abstract class Collision {
     }
     public boolean intersects(Collision o){
         return id != o.getID() && x >= o.x - width && x <= o.x + o.width && y >= o.y - height && y <= o.y + o.height;
-    }
-    public abstract void collision(GameObject o);
-    
+    }    
     private static int getNewID(){
         idBuilder++;
         return idBuilder;

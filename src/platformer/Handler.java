@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * @author Charlie Hands
  */
 public class Handler {
-    private LinkedList<GameObject> objects = new LinkedList<>();
+    private final LinkedList<GameObject> objects = new LinkedList<>();
     public void tick(){
         objects.forEach(x -> x.tick());
         objects.stream()

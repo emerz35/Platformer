@@ -1,5 +1,6 @@
 package gameObjects;
 
+import gameObjects.behaviours.NoMovementBehaviour;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -9,9 +10,8 @@ import java.awt.Graphics;
  */
 public class Platform extends GameObject{
 
-   
     public Platform(float x, float y, float width, float height) {
-        super(x, y, width, height, Color.GRAY);
+        super(x, y, width, height, Color.GRAY, new Collision(x,y,width,height), new NoMovementBehaviour());
     }
 
     @Override

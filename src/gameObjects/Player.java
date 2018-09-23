@@ -1,5 +1,6 @@
 package gameObjects;
 
+import gameObjects.behaviours.MovementBehaviour;
 import java.awt.Color;
 import platformer.Platformer;
 
@@ -8,20 +9,16 @@ import platformer.Platformer;
  * @author Charlie Hands
  */
 public class Player extends GameObject{
-    public boolean[] keys = new boolean[]{false,false};
     public int jumps = 2;
-    public Player(float x, float y){
-        super(x,y,32,32, Color.black);
+    public Player(float x, float y, MovementBehaviour m){
+        super(x,y,32,32,Color.black,new Collision(x,y,32,32),m);
+        this.movement = m;
     }
     @Override
     public void tick(){
+        movement.tick();
         x += velx;
         y += vely;
-        if(keys[0] && keys[1]) velx = 0;
-        else if(keys[0]) velx = 5;
-        else if(keys[1]) velx = -5;
-        else velx = 0;
-        gravity();
         y = Platformer.clamp(y,0,420);
         if(y==420) {
             vely = 0;

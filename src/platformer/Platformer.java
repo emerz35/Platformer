@@ -6,8 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import gameObjects.Player;
 import gameObjects.Platform;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import gameObjects.behaviours.PlayerMovementBehaviour;
 
 /**
  *
@@ -19,15 +18,17 @@ public class Platformer extends Canvas implements Runnable{
     private final Window window;
     private final Handler handler;
     private final int width = 800, height = 480;
-    public static final float GRAVITY = 1;
-    public Player player;
+    public static final float GRAVITY = 0.25f;
+    private final Player player;
     public Platformer(){
         window = new Window("Platformer", width, height, this);
         handler = new Handler();
         Platform platform = new Platform(120,height - 200,10,200);
         Platform platform2 = new Platform(120, height - 50,200,10);
-        player = new Player(100,100);
-        handler.addObject(player);
+        PlayerMovementBehaviour pmb = new PlayerMovementBehaviour(this);
+        this.player = new Player(100,100, pmb);
+        addKeyListener(pmb);
+        handler.addObject(this.player);
         handler.addObject(platform);
         handler.addObject(platform2);
     }
@@ -55,24 +56,6 @@ public class Platformer extends Canvas implements Runnable{
     @Override
     public void run() {
         requestFocus();
-        addKeyListener(new KeyAdapter(){
-            
-            @Override 
-            public void keyPressed(KeyEvent e){
-                if(e.getKeyCode() == KeyEvent.VK_SPACE && player.jumps > 0){
-                    player.setVelY(-15); 
-                    player.jumps--;
-                }
-                else if(e.getKeyCode() == KeyEvent.VK_D)player.keys[0] = true;
-                else if(e.getKeyCode() == KeyEvent.VK_A)player.keys[1] = true;
-               
-            }
-            @Override
-            public void keyReleased(KeyEvent e){
-               if(e.getKeyCode() == KeyEvent.VK_D)player.keys[0] = false;
-               else if(e.getKeyCode() == KeyEvent.VK_A)player.keys[1] = false;
-            }
-        });
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -109,6 +92,7 @@ public class Platformer extends Canvas implements Runnable{
         }
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.white);
+        System.out.println(Color.white.getRGB());
         g.fillRect(0, 0, width, height);
         handler.render(g);
         
@@ -119,5 +103,8 @@ public class Platformer extends Canvas implements Runnable{
         if(var >= max) return max;
         if(var <= min) return min;
         return var;
+    }
+    public Player getPlayer(){
+        return this.player;
     }
 }
