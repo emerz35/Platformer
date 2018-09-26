@@ -3,20 +3,22 @@ package gameObjects;
 import gameObjects.behaviours.MovementBehaviour;
 import java.awt.Color;
 import platformer.Platformer;
+import stages.Stage;
 
 /**
  *
  * @author Charlie Hands
  */
 public class Player extends GameObject{
-    public int jumps = 2;
-    public Player(float x, float y, MovementBehaviour m){
-        super(x,y,32,32,Color.black,new Collision(x,y,32,32),m);
+    public Player(float x, float y, MovementBehaviour m, Stage s){
+        super(x,y,32,32,Color.black,new Collision(x,y,32,32),m,s);
         this.movement = m;
     }
     @Override
     public void tick(){
         movement.tick();
+        velx = xisFree(velx);
+        vely = yisFree(vely);
         x += velx;
         y += vely;
         y = Platformer.clamp(y,0,420);
@@ -27,6 +29,5 @@ public class Player extends GameObject{
     }
     @Override 
     public void collision(GameObject c){
-        if(c instanceof Platform) jumps=2;
     }
 }

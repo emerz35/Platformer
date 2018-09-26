@@ -8,5 +8,4 @@ public class NoMovementBehaviour implements MovementBehaviour{
     @Override
     public void tick() {
     }
-    
 }

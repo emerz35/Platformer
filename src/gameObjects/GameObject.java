@@ -4,6 +4,7 @@ import gameObjects.behaviours.MovementBehaviour;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import stages.Stage;
 
 /**
  *
@@ -16,7 +17,9 @@ public abstract class GameObject{
     private final Color color;
     private Image sprite;
     protected MovementBehaviour movement;
-    public GameObject(float x, float y, float width, float height, Color color, Collision c, MovementBehaviour mb){
+    private Stage stage;
+    public int jumps = 2;
+    public GameObject(float x, float y, float width, float height, Color color, Collision c, MovementBehaviour mb, Stage s){
         this.color = color;
         this.collision = c;
         this.movement = mb;
@@ -24,6 +27,7 @@ public abstract class GameObject{
         this.y = y;
         this.width = width;
         this.height = height;
+        this.stage = s;
     } 
     public void render(Graphics g){
         g.setColor(color);
@@ -45,8 +49,7 @@ public abstract class GameObject{
     public void setY(float y){
         this.y = y;
     }
-    
-   public float getVelX(){
+    public float getVelX(){
         return velx;
     }
     public void setVelX(float velx){
@@ -69,5 +72,33 @@ public abstract class GameObject{
     }
     public boolean intersects(GameObject o){
         return collision.intersects(o.getCollision());
+    }
+    public float xisFree(float velX){
+        if(velX == 0) return 0;
+        Collision c = new Collision(x + velX,y ,width,height);
+        for(GameObject tempObject : stage.getObjects()){
+                if(tempObject instanceof Platform && tempObject.getCollision().intersects(c)){
+                    jumps = 2;    
+                    return xisFree(slow(velX, 1));
+                }
+        }
+        return velX;
+	}
+    public float yisFree(float velY){
+        if(velY == 0) return 0;
+        Collision c = new Collision(x, y + velY,width,height);
+        for(GameObject tempObject: stage.getObjects()){
+                if(tempObject instanceof Platform && tempObject.getCollision().intersects(c)){
+                    jumps = 2;    
+                    return yisFree(slow(velY,1));
+                }
+        }
+        return velY;
+    }
+    public float slow(float vel, float deceleration){
+            return vel > 0 ? vel - deceleration : vel + deceleration;
+    }
+    public void setStage(Stage stage){
+        this.stage = stage;
     }
 }

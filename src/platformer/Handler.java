@@ -2,7 +2,6 @@ package platformer;
 import gameObjects.GameObject;
 import java.awt.Graphics;
 import java.util.LinkedList;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -10,18 +9,7 @@ import java.util.stream.Collectors;
  */
 public class Handler {
     private final LinkedList<GameObject> objects = new LinkedList<>();
-    public void tick(){
-        objects.forEach(x -> x.tick());
-        objects.stream()
-                .filter(x -> x.isAlive())
-                .collect(Collectors.toList());
-        objects.forEach(x -> collision(x));
-    }
-    private void collision(GameObject o){
-        objects.stream().filter(x -> !x.equals(o)).forEach(x -> {
-            if(o.intersects(x)) o.collision(x);
-            });
-    }
+    
     public void render(Graphics g){
         objects.forEach(x -> x.render(g));
     }

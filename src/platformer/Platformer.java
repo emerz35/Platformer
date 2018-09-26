@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 import gameObjects.Player;
 import gameObjects.Platform;
 import gameObjects.behaviours.PlayerMovementBehaviour;
+import stages.Stage;
 
 /**
  *
@@ -18,16 +19,21 @@ public class Platformer extends Canvas implements Runnable{
     private final Window window;
     private final Handler handler;
     private final int width = 800, height = 480;
-    public static final float GRAVITY = 0.25f;
+    public static final float GRAVITY = 1f;
     private final Player player;
+    private Stage currentStage;
     public Platformer(){
         window = new Window("Platformer", width, height, this);
         handler = new Handler();
-        Platform platform = new Platform(120,height - 200,10,200);
-        Platform platform2 = new Platform(120, height - 50,200,10);
+        currentStage = new Stage();
+        Platform platform = new Platform(320,200,200,10,currentStage);
+        Platform platform2 = new Platform(120,250,100,10,currentStage);
         PlayerMovementBehaviour pmb = new PlayerMovementBehaviour(this);
-        this.player = new Player(100,100, pmb);
+        this.player = new Player(100,100, pmb,currentStage);
         addKeyListener(pmb);
+        currentStage.addObject(this.player);
+        currentStage.addObject(platform);
+        currentStage.addObject(platform2);
         handler.addObject(this.player);
         handler.addObject(platform);
         handler.addObject(platform2);
@@ -82,7 +88,7 @@ public class Platformer extends Canvas implements Runnable{
         stop();	
     }
     private void tick(){
-        handler.tick();
+        currentStage.tick();
     }
     private void render(){
         BufferStrategy bs = this.getBufferStrategy();
@@ -92,7 +98,6 @@ public class Platformer extends Canvas implements Runnable{
         }
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.white);
-        System.out.println(Color.white.getRGB());
         g.fillRect(0, 0, width, height);
         handler.render(g);
         
@@ -106,5 +111,11 @@ public class Platformer extends Canvas implements Runnable{
     }
     public Player getPlayer(){
         return this.player;
+    }
+    public void setStage(Stage stage){
+        this.currentStage = stage;
+    }
+    public Stage getCurrentStage(){
+        return currentStage;
     }
 }

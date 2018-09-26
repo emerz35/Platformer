@@ -19,7 +19,7 @@ public class PlayerMovementBehaviour extends KeyAdapter implements MovementBehav
         if(keys[0] && keys[1]) game.getPlayer().setVelX(0);
         else if(keys[0]) game.getPlayer().setVelX(5);
         else if(keys[1]) game.getPlayer().setVelX(-5);
-        else game.getPlayer().setVelY(0);
+        else game.getPlayer().setVelX(0);
         game.getPlayer().setVelY(game.getPlayer().getVelY() + Platformer.GRAVITY);
     }
     @Override 
@@ -30,7 +30,6 @@ public class PlayerMovementBehaviour extends KeyAdapter implements MovementBehav
         }
         else if(e.getKeyCode() == KeyEvent.VK_D)keys[0] = true;
         else if(e.getKeyCode() == KeyEvent.VK_A)keys[1] = true;
-
     }
     @Override
     public void keyReleased(KeyEvent e){
