@@ -44,4 +44,10 @@ public class Stage {
     public void removeObject(GameObject o){
         o.remove();
     }
+    public void changeY(float dy){
+        objects.forEach(x -> x.setY(x.getY() + dy));
+    }
+    public void changeX(float dx){
+        objects.forEach(x -> x.setX(x.getX() + dx));
+    }
 }

@@ -1,5 +1,6 @@
 package items.weapons;
 
+import gameObjects.GameObject;
 import items.Item;
 import platformer.AttackEvent;
 
@@ -9,4 +10,5 @@ import platformer.AttackEvent;
  */
 public interface Weapon extends Item{
     public int attack(AttackEvent e);
+    public GameObject getUser();
 }
