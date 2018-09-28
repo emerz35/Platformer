@@ -27,7 +27,7 @@ public abstract class GameObject{
     private final Storage<Item> items = new Storage();
     private Weapon weapon;
     private Armour armour;
-    private int health;
+    private float health;
     public GameObject(float x, float y, float width, float height, int health, Color color, Collision c, MovementBehaviour mb, Stage s){
         this.color = color;
         this.collision = c;
@@ -48,17 +48,19 @@ public abstract class GameObject{
         this.stage = s;
         this.health = health;
     }
-    public void defend(AttackEvent e,int damage){
+    public void defend(AttackEvent e,float damage){
         armour.defend(e,damage);
     }
-    public int attack(AttackEvent e){
+    public float attack(AttackEvent e){
         return weapon.attack(e);
     }
     public void render(Graphics g){
         g.setColor(color);
         g.fillRect((int)x,(int) y, (int) width, (int) height);
     } 
-    
+    public void changeHealth(float change){
+        health+=change;
+    }
     public abstract void tick();
     public abstract void collision(GameObject o);
     

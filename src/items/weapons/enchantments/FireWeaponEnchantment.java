@@ -16,7 +16,7 @@ public class FireWeaponEnchantment implements Weapon{
         this.user = user;
     }
     @Override
-    public int attack(AttackEvent e) {
+    public float attack(AttackEvent e) {
         //Add fire debuff to e.getDefender()
         return weapon.attack(e);
     }
@@ -24,5 +24,10 @@ public class FireWeaponEnchantment implements Weapon{
     @Override
     public String getName() {
         return "Fiery " + weapon.getName();
+    }
+
+    @Override
+    public void render(float x, float y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

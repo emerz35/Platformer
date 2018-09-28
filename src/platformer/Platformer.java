@@ -8,6 +8,7 @@ import gameObjects.Player;
 import gameObjects.Platform;
 import gameObjects.behaviours.PlayerMovementBehaviour;
 import stages.Stage;
+import viewables.MenuHandler;
 
 /**
  *
@@ -22,10 +23,12 @@ public class Platformer extends Canvas implements Runnable{
     public static final float GRAVITY = 1f;
     private final Player player;
     private Stage currentStage;
+    private final MenuHandler menuHandler;
     public Platformer(){
         window = new Window("Platformer", width, height, this);
         handler = new Handler();
         currentStage = new Stage();
+        menuHandler = new MenuHandler();
         Platform platform = new Platform(320,200,200,10,currentStage);
         Platform platform2 = new Platform(120,250,100,10,currentStage);
         PlayerMovementBehaviour pmb = new PlayerMovementBehaviour(this);
@@ -100,6 +103,7 @@ public class Platformer extends Canvas implements Runnable{
         g.setColor(Color.white);
         g.fillRect(0, 0, width, height);
         handler.render(g);
+        menuHandler.render(g);
         
         g.dispose();
         bs.show();

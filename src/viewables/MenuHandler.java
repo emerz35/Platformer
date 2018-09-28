@@ -10,17 +10,17 @@ import java.util.LinkedList;
  * @author Charlie Hands
  */
 public class MenuHandler extends MouseAdapter{
-    private LinkedList<Viewable> currentViewables;
+    private final LinkedList<Viewable> currentViewables;
     public MenuHandler() {
         this.currentViewables = new LinkedList<>();
     }
     @Override
     public void mouseMoved(MouseEvent e){
-        currentViewables.getLast().highlight();
+        currentViewables.getLast().highlight(e.getX(),e.getY());
     }
     @Override
     public void mouseClicked(MouseEvent e){
-        currentViewables.getLast().onClick();
+        currentViewables.getLast().onClick(e.getX(),e.getY());
     }
     public void addViewable(Viewable viewable){
         currentViewables.add(viewable);

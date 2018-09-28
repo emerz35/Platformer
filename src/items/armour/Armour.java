@@ -8,5 +8,5 @@ import platformer.AttackEvent;
  * @author Charlie Hands
  */
 public interface Armour extends Item{
-    public void defend(AttackEvent e, int damage);
+    public void defend(AttackEvent e, float damage);
 }

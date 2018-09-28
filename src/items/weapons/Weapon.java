@@ -9,6 +9,6 @@ import platformer.AttackEvent;
  * @author Charlie Hands
  */
 public interface Weapon extends Item{
-    public int attack(AttackEvent e);
+    public float attack(AttackEvent e);
     //public GameObject getUser();
 }

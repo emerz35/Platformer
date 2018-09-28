@@ -1,16 +1,14 @@
 package viewables;
 
 import java.awt.Graphics;
-import java.util.LinkedList;
-import viewables.components.Component;
 
 /**
  *
  * @author Charlie Hands
  */
 public interface Viewable {
-    public void onClick();
-    public void highlight();
+    public void onClick(int mx, int my);
+    public void highlight(int mx, int my);
     public void render(Graphics g);
 
 }

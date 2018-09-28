@@ -1,4 +1,4 @@
-package items.weapons;
+package items.armour;
 
 import platformer.AttackEvent;
 
@@ -6,15 +6,16 @@ import platformer.AttackEvent;
  *
  * @author Charlie Hands
  */
-public class Sword implements Weapon{
+public class LeatherArmour implements Armour{
+
     @Override
-    public float attack(AttackEvent e) {
-        return 20;
+    public void defend(AttackEvent e, float damage) {
+       e.getDefender().changeHealth(-damage * 0.9f);
     }
 
     @Override
     public String getName() {
-        return "Sword";
+        return "Leather Armour";
     }
 
     @Override
