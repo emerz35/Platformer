@@ -17,7 +17,7 @@ public class FireWeaponEnchantment implements Weapon{
     }
     @Override
     public int attack(AttackEvent e) {
-        //Add fire debuff to e.getDefender().getUser()
+        //Add fire debuff to e.getDefender()
         return weapon.attack(e);
     }
 
@@ -25,10 +25,4 @@ public class FireWeaponEnchantment implements Weapon{
     public String getName() {
         return "Fiery " + weapon.getName();
     }
-
-    @Override
-    public GameObject getUser() {
-        return user;
-    }
-    
 }

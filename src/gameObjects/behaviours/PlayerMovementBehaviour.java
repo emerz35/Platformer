@@ -1,5 +1,6 @@
 package gameObjects.behaviours;
 
+import gameObjects.GameObject;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import platformer.Platformer;
@@ -13,23 +14,35 @@ public class PlayerMovementBehaviour extends KeyAdapter implements MovementBehav
     public PlayerMovementBehaviour(Platformer p){
         this.game = p;
     }
-    boolean[] keys = new boolean[]{false,false};
+    boolean[] keys = new boolean[]{false,false,false};
     @Override
-    public void tick() {
-        if(keys[0] && keys[1]) game.getPlayer().setVelX(0);
-        else if(keys[0]) game.getPlayer().setVelX(5);
-        else if(keys[1]) game.getPlayer().setVelX(-5);
-        else game.getPlayer().setVelX(0);
-        game.getPlayer().setVelY(game.getPlayer().getVelY() + Platformer.GRAVITY);
+    public void tick(GameObject o) {
+        if(keys[0] && keys[1]) o.setVelX(0);
+        else if(keys[0]) o.setVelX(5);
+        else if(keys[1]) o.setVelX(-5);
+        else o.setVelX(0);
+        if(keys[2] && o.jumps > 0) {
+            o.setVelY(-15);
+            o.jumps--;
+            keys[2] = false;
+        }
+        o.setVelY(game.getPlayer().getVelY() + Platformer.GRAVITY);
     }
     @Override 
     public void keyPressed(KeyEvent e){
-        if(e.getKeyCode() == KeyEvent.VK_SPACE && game.getPlayer().jumps > 0){
-            game.getPlayer().setVelY(-15); 
-            game.getPlayer().jumps--;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_SPACE:
+                keys[2] = true;
+                break;
+            case KeyEvent.VK_D:
+                keys[0] = true;
+                break;
+            case KeyEvent.VK_A:
+                keys[1] = true;
+                break;
+            default:
+                break;
         }
-        else if(e.getKeyCode() == KeyEvent.VK_D)keys[0] = true;
-        else if(e.getKeyCode() == KeyEvent.VK_A)keys[1] = true;
     }
     @Override
     public void keyReleased(KeyEvent e){

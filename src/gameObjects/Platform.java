@@ -12,7 +12,7 @@ import stages.Stage;
 public class Platform extends GameObject{
 
     public Platform(float x, float y, float width, float height, Stage stage) {
-        super(x, y, width, height, Color.GRAY, new Collision(x,y,width,height), new NoMovementBehaviour(), stage);
+        super(x, y, width, height,0, Color.GRAY, new Collision(x,y+1,width,height), new NoMovementBehaviour(), stage);
     }
 
     @Override

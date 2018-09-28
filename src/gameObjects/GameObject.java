@@ -1,9 +1,14 @@
 package gameObjects;
 
 import gameObjects.behaviours.MovementBehaviour;
+import items.Item;
+import items.armour.Armour;
+import items.weapons.Weapon;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import platformer.AttackEvent;
+import platformer.Storage;
 import stages.Stage;
 
 /**
@@ -19,7 +24,11 @@ public abstract class GameObject{
     protected MovementBehaviour movement;
     private Stage stage;
     public int jumps = 2;
-    public GameObject(float x, float y, float width, float height, Color color, Collision c, MovementBehaviour mb, Stage s){
+    private final Storage<Item> items = new Storage();
+    private Weapon weapon;
+    private Armour armour;
+    private int health;
+    public GameObject(float x, float y, float width, float height, int health, Color color, Collision c, MovementBehaviour mb, Stage s){
         this.color = color;
         this.collision = c;
         this.movement = mb;
@@ -28,7 +37,23 @@ public abstract class GameObject{
         this.width = width;
         this.height = height;
         this.stage = s;
+        this.health = health;
     } 
+    public GameObject(float x, float y, float width, float height,int health, Color color, MovementBehaviour mb, Stage s){
+        this.x = x;
+        this.y = y;
+        this.collision = new Collision(x,y,width,height);
+        this.color = color;
+        this.movement = mb;
+        this.stage = s;
+        this.health = health;
+    }
+    public void defend(AttackEvent e,int damage){
+        armour.defend(e,damage);
+    }
+    public int attack(AttackEvent e){
+        return weapon.attack(e);
+    }
     public void render(Graphics g){
         g.setColor(color);
         g.fillRect((int)x,(int) y, (int) width, (int) height);

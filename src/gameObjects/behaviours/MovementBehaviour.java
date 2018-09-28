@@ -1,10 +1,12 @@
 package gameObjects.behaviours;
 
+import gameObjects.GameObject;
+
 /**
  *
  * @author Charlie Hands
  */
 public interface MovementBehaviour {
-    public void tick();
+    public void tick(GameObject o);
    
 }

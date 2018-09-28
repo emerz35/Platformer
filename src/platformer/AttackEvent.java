@@ -1,20 +1,19 @@
 package platformer;
 
-import items.armour.Armour;
-import items.weapons.Weapon;
+import gameObjects.GameObject;
 
 /**
  *
  * @author Charlie Hands
  */
 public class AttackEvent {
-    private Armour defender;
-    private Weapon attacker;
+    private GameObject defender;
+    private GameObject attacker;
     
-    public Weapon getAttacker(){
+    public GameObject getAttacker(){
         return attacker;
     }
-    public Armour getDefender(){
+    public GameObject getDefender(){
         return defender;
     }
     public void attackEvent(){
