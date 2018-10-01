@@ -10,10 +10,7 @@ import platformer.Platformer;
  * @author Charlie Hands
  */
 public class PlayerMovementBehaviour extends KeyAdapter implements MovementBehaviour{
-    Platformer game;
-    public PlayerMovementBehaviour(Platformer p){
-        this.game = p;
-    }
+    
     boolean[] keys = new boolean[]{false,false,false};
     @Override
     public void tick(GameObject o) {
@@ -26,7 +23,7 @@ public class PlayerMovementBehaviour extends KeyAdapter implements MovementBehav
             o.jumps--;
             keys[2] = false;
         }
-        o.setVelY(game.getPlayer().getVelY() + Platformer.GRAVITY);
+        o.setVelY(o.getVelY() + Platformer.GRAVITY);
     }
     @Override 
     public void keyPressed(KeyEvent e){

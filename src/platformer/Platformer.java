@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import gameObjects.Player;
 import gameObjects.Platform;
+import gameObjects.behaviours.LineMovementBehaviour;
 import gameObjects.behaviours.PlayerMovementBehaviour;
+import geometry.LineFunction;
 import stages.Stage;
 import viewables.MenuHandler;
 
@@ -31,15 +33,15 @@ public class Platformer extends Canvas implements Runnable{
         menuHandler = new MenuHandler();
         Platform platform = new Platform(320,200,200,10,currentStage);
         Platform platform2 = new Platform(120,250,100,10,currentStage);
-        PlayerMovementBehaviour pmb = new PlayerMovementBehaviour(this);
-        this.player = new Player(100,100, pmb,currentStage);
+        PlayerMovementBehaviour pmb = new PlayerMovementBehaviour();
+        this.player = new Player(100,100, new LineMovementBehaviour(new LineFunction(0.5f,20,new float[]{0,500},new float[]{0,200}),5),currentStage);
         addKeyListener(pmb);
         currentStage.addObject(this.player);
-        currentStage.addObject(platform);
-        currentStage.addObject(platform2);
+        //currentStage.addObject(platform);
+        //currentStage.addObject(platform2);
         handler.addObject(this.player);
-        handler.addObject(platform);
-        handler.addObject(platform2);
+        //handler.addObject(platform);
+        //handler.addObject(platform2);
     }
     /**
      * @param args the command line arguments

@@ -19,8 +19,8 @@ public class LineFunction {
     }
     
     public float f(float x){
-        Platformer.clamp(xbounds[0],xbounds[1],x);
-        return Platformer.clamp(ybounds[0],ybounds[1],gradient * x + yIntercept);
+        Platformer.clamp(x,xbounds[0],xbounds[1]);
+        return Platformer.clamp((gradient * x) + yIntercept,ybounds[0],ybounds[1]);
     }
     public float[] getXBounds(){
         return xbounds;
