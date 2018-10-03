@@ -1,5 +1,6 @@
 package platformer;
 
+import gameObjects.Enemy;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,6 +11,7 @@ import gameObjects.behaviours.LineMovementBehaviour;
 import gameObjects.behaviours.PlayerMovementBehaviour;
 import geometry.LineFunction;
 import stages.Stage;
+import viewables.GUIViewable;
 import viewables.MenuHandler;
 
 /**
@@ -35,14 +37,18 @@ public class Platformer extends Canvas implements Runnable{
         Platform platform2 = new Platform(120,250,100,10,currentStage);
         PlayerMovementBehaviour pmb = new PlayerMovementBehaviour();
         this.player = new Player(100,100, pmb,currentStage);
+        Enemy e = new Enemy(200,200,16,16,32f,Color.red,new LineMovementBehaviour(new LineFunction(0,20,new float[]{0,width}, new float[]{0,height}),5),currentStage);
         //this.player = new Player(100,100, new LineMovementBehaviour(new LineFunction(0.5f,20,new float[]{0,500},new float[]{0,200}),5),currentStage);
         addKeyListener(pmb); 
         currentStage.addObject(this.player);
         currentStage.addObject(platform);
         currentStage.addObject(platform2);
+        currentStage.addObject(e);
         handler.addObject(this.player);
         handler.addObject(platform);
         handler.addObject(platform2);
+        handler.addObject(e);
+        menuHandler.addViewable(new GUIViewable(player));
     }
     /**
      * @param args the command line arguments

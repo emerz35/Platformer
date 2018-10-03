@@ -2,6 +2,7 @@ package gameObjects;
 
 import gameObjects.behaviours.MovementBehaviour;
 import java.awt.Color;
+import platformer.AttackEvent;
 import platformer.Platformer;
 import stages.Stage;
 
@@ -12,7 +13,6 @@ import stages.Stage;
 public class Player extends GameObject{
     public Player(float x, float y, MovementBehaviour m, Stage s){
         super(x,y,32,32,100,Color.black,new Collision(x,y,32,32),m,s);
-        this.movement = m;
     }
     @Override
     public void tick(){
@@ -28,6 +28,7 @@ public class Player extends GameObject{
         }
     }
     @Override 
-    public void collision(GameObject c){
+    public void collision(GameObject o){
+        if(o instanceof Enemy) new AttackEvent(o,this).attackEvent();
     }
 }
