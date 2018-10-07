@@ -28,7 +28,7 @@ public abstract class GameObject{
     private Weapon weapon;
     private Armour armour;
     private float health;
-    public GameObject(float x, float y, float width, float height, float health, Color color, Collision c, MovementBehaviour mb, Stage s){
+    public GameObject(float x, float y, float width, float height, float health, Color color, Collision c, MovementBehaviour mb, Stage s, Weapon weapon, Armour armour){
         this.color = color;
         this.collision = c;
         this.movement = mb;
@@ -38,10 +38,26 @@ public abstract class GameObject{
         this.height = height;
         this.stage = s;
         this.health = health;
+        this.armour = armour;
+        this.weapon = weapon;
     } 
-    public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s){
+    public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s, Weapon weapon, Armour armour){
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
+        this.collision = new Collision(x,y,width,height);
+        this.color = color;
+        this.movement = mb;
+        this.stage = s;
+        this.health = health;
+        this.armour = armour;
+        this.weapon = weapon;
+    }public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
         this.collision = new Collision(x,y,width,height);
         this.color = color;
         this.movement = mb;

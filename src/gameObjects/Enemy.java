@@ -1,6 +1,8 @@
 package gameObjects;
 
 import gameObjects.behaviours.MovementBehaviour;
+import items.armour.LeatherArmour;
+import items.weapons.Sword;
 import java.awt.Color;
 import stages.Stage;
 
@@ -11,7 +13,7 @@ import stages.Stage;
 public class Enemy extends GameObject{
 
     public Enemy(float x, float y, float width, float height, float health, Color color, MovementBehaviour mb, Stage s) {
-        super(x, y, width, height, health, color, mb, s);
+        super(x, y, width, height, health, color, mb, s, new Sword(), new LeatherArmour());
     }
 
     @Override

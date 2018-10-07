@@ -2,7 +2,6 @@ package gameObjects;
 
 import gameObjects.behaviours.NoMovementBehaviour;
 import java.awt.Color;
-import java.awt.Graphics;
 import stages.Stage;
 
 /**
@@ -12,7 +11,7 @@ import stages.Stage;
 public class Platform extends GameObject{
 
     public Platform(float x, float y, float width, float height, Stage stage) {
-        super(x, y, width, height,0f, Color.GRAY, new NoMovementBehaviour(), stage);
+        super(x, y, width, height,0f, Color.gray, new NoMovementBehaviour(), stage);
     }
 
     @Override

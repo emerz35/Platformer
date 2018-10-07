@@ -23,6 +23,8 @@ public class GUIViewable implements Viewable{
 
     @Override
     public void render(Graphics g) {
+        g.setColor(Color.gray);
+        g.fillRect(10, 10, 100, 20);
         g.setColor(Color.green);
         g.fillRect(10,10,(int)player.getHealth(),20);
     }

@@ -10,7 +10,7 @@ public class LeatherArmour implements Armour{
 
     @Override
     public void defend(AttackEvent e, float damage) {
-       e.getDefender().changeHealth(-damage * 0.9f);
+        e.getDefender().changeHealth(-damage * 0.9f);
     }
 
     @Override
