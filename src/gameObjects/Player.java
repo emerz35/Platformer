@@ -15,7 +15,7 @@ import stages.Stage;
 public class Player extends GameObject{
     private int invincibility = 0;
     public Player(float x, float y, MovementBehaviour m, Stage s){
-        super(x,y,32,32,100,Color.black,new Collision(x,y,32,32),m,s, new Sword(),new LeatherArmour());
+        super(x,y,32,32,100,Color.black,new Collision(x,y,32,32),m,s, new Sword(), new LeatherArmour());
     }
     @Override
     public void tick(){
@@ -30,12 +30,14 @@ public class Player extends GameObject{
             jumps = 2;
         }
         if(invincibility >0) invincibility--;
+        collision.setX(x);
+        collision.setY(y);
     }
     @Override 
     public void collision(GameObject o){
         if(o instanceof Enemy && invincibility <= 0){ 
             new AttackEvent(o,this).attackEvent();
-            invincibility = 120;
+            invincibility = 60;
         }
     }
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class Stage {
     private Image background;
-    private final List<GameObject> objects = new LinkedList();
+    private List<GameObject> objects = new LinkedList();
     
     public List<GameObject> getObjects(){
         return objects;
@@ -23,14 +23,15 @@ public class Stage {
     }
     public void tick(){
         objects.forEach(x -> x.tick());
-        objects.stream()
+        objects = objects.stream()
                 .filter(x -> x.isAlive())
                 .collect(Collectors.toList());
         objects.forEach(x -> collision(x));
     }
     private void collision(GameObject o){
-        objects.stream().filter(x -> !x.equals(o)).forEach(x -> {
-            if(o.intersects(x)) o.collision(x);
+        objects.stream().filter(x -> x.intersects(o)).forEach(x -> {
+            o.collision(x);
+            //System.out.println(o + " " + o.getX() + ", " + (o.getX() + o.getWidth()) + "; " + o.getY() + ", " + (o.getY() + o.getHeight()));
             });
     }
     

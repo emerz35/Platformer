@@ -43,7 +43,18 @@ public class PlayerMovementBehaviour extends KeyAdapter implements MovementBehav
     }
     @Override
     public void keyReleased(KeyEvent e){
-       if(e.getKeyCode() == KeyEvent.VK_D)keys[0] = false;
-       else if(e.getKeyCode() == KeyEvent.VK_A)keys[1] = false;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_D:
+                keys[0] = false;
+                break;
+            case KeyEvent.VK_A:
+                keys[1] = false;
+                break;
+            case KeyEvent.VK_SPACE:
+                keys[2] = false;
+                break;
+            default:
+                break;
+        }
     }
 }

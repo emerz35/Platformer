@@ -37,7 +37,7 @@ public class Platformer extends Canvas implements Runnable{
         Platform platform2 = new Platform(120,250,100,10,currentStage);
         PlayerMovementBehaviour pmb = new PlayerMovementBehaviour();
         this.player = new Player(100,100, pmb,currentStage);
-        Enemy e = new Enemy(100f,100f,16f,16f,32f,Color.red, new LineMovementBehaviour(new LineFunction(0.5f,20,new float[]{0,500},new float[]{0,200}),5),currentStage);
+        Enemy e = new Enemy(100,100,32,32,32,Color.red, new LineMovementBehaviour(new LineFunction(0,0,new float[]{0,500},new float[]{-1,200}),5)/*new NoMovementBehaviour()*/,currentStage);
         addKeyListener(pmb); 
         currentStage.addObject(this.player);
         currentStage.addObject(platform);

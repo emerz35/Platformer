@@ -17,7 +17,7 @@ import stages.Stage;
  */
 public abstract class GameObject{
     protected float velx = 0, vely = 0,x,y,width,height;
-    private final Collision collision;
+    protected final Collision collision;
     private boolean alive = true;
     private final Color color;
     private Image sprite;
@@ -123,7 +123,7 @@ public abstract class GameObject{
         return this.collision;
     }
     public boolean intersects(GameObject o){
-        return collision.intersects(o.getCollision());
+        return o.getCollision().intersects(this.collision);
     }
     public float xisFree(float velX){
         if(velX == 0) return 0;
@@ -153,5 +153,10 @@ public abstract class GameObject{
     public void setStage(Stage stage){
         this.stage = stage;
     }
-    
+    public float getWidth(){
+        return this.width;
+    }
+    public float getHeight(){
+        return this.height;
+    }
 }

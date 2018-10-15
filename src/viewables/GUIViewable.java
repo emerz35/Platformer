@@ -15,6 +15,7 @@ public class GUIViewable implements Viewable{
     }
     @Override
     public void onClick(int mx, int my) {
+        
     }
 
     @Override

@@ -16,7 +16,11 @@ public class Platform extends GameObject{
 
     @Override
     public void tick() {
+        x += velx;
+        y += vely;
         movement.tick(this);
+        collision.setX(x);
+        collision.setY(y);
     }
 
     @Override
