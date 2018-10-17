@@ -22,5 +22,9 @@ public class InventoryViewable implements Viewable{
     public void render(Graphics g) {
         
     }
+
+    @Override
+    public void mouseDown(int mx, int my) {
+    }
     
 }

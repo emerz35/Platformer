@@ -23,6 +23,8 @@ public class Enemy extends GameObject{
         movement.tick(this);
         collision.setX(x);
         collision.setY(y);
+        if(getHealth() <= 0) remove();
+        if(getInvinc()>0)reduceInvinc();
     }
 
     @Override

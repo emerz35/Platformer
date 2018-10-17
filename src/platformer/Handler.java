@@ -11,6 +11,7 @@ public class Handler {
     private final LinkedList<GameObject> objects = new LinkedList<>();
     
     public void render(Graphics g){
+        objects.removeIf(x -> !x.isAlive());
         objects.forEach(x -> x.render(g));
     }
     

@@ -22,5 +22,6 @@ public class AttackEvent {
     }
     public void attackEvent(){
         defender.defend(this,attacker.attack(this));
+        if(attacker.getHealth() < 0);
     }
 }

@@ -14,10 +14,17 @@ public class PlayerMovementBehaviour extends KeyAdapter implements MovementBehav
     boolean[] keys = new boolean[]{false,false,false};
     @Override
     public void tick(GameObject o) {
-        if(keys[0] && keys[1]) o.setVelX(0);
-        else if(keys[0]) o.setVelX(5);
-        else if(keys[1]) o.setVelX(-5);
-        else o.setVelX(0);
+        o.setVelX(5 * o.getDirection().getMultiplier());
+        if(keys[0] && keys[1]) o.setDirection("");
+        else if(keys[0]) {
+            o.setDirection("right");
+            o.setFacing("right");
+        }
+        else if(keys[1]){
+            o.setDirection("left");
+            o.setFacing("left");
+        }
+        else o.setDirection("");
         if(keys[2] && o.jumps > 0) {
             o.setVelY(-15);
             o.jumps--;

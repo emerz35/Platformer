@@ -8,7 +8,9 @@ import java.awt.image.BufferStrategy;
 import gameObjects.Player;
 import gameObjects.Platform;
 import gameObjects.behaviours.LineMovementBehaviour;
+import gameObjects.behaviours.NoMovementBehaviour;
 import gameObjects.behaviours.PlayerMovementBehaviour;
+import gameObjects.weaponObjects.MeleeObject;
 import geometry.LineFunction;
 import stages.Stage;
 import viewables.GUIViewable;
@@ -37,8 +39,9 @@ public class Platformer extends Canvas implements Runnable{
         Platform platform2 = new Platform(120,250,100,10,currentStage);
         PlayerMovementBehaviour pmb = new PlayerMovementBehaviour();
         this.player = new Player(100,100, pmb,currentStage);
-        Enemy e = new Enemy(100,100,32,32,32,Color.red, new LineMovementBehaviour(new LineFunction(0,0,new float[]{0,500},new float[]{-1,200}),5)/*new NoMovementBehaviour()*/,currentStage);
+        Enemy e = new Enemy(100,100,32,32,32,Color.red, new LineMovementBehaviour(new LineFunction(0,50,new float[]{0,500},new float[]{-1,200}),2)/*new NoMovementBehaviour()*/,currentStage);
         addKeyListener(pmb); 
+        addMouseListener(menuHandler);
         currentStage.addObject(this.player);
         currentStage.addObject(platform);
         currentStage.addObject(platform2);
@@ -47,7 +50,10 @@ public class Platformer extends Canvas implements Runnable{
         handler.addObject(platform);
         handler.addObject(platform2);
         handler.addObject(e);
-        menuHandler.addViewable(new GUIViewable(player));
+        MeleeObject o = new MeleeObject(1,1,15,32,0,null,new NoMovementBehaviour(),null, player);
+        currentStage.addObject(o);
+        handler.addObject(o);
+        menuHandler.addViewable(new GUIViewable(player,o));
     }
     /**
      * @param args the command line arguments

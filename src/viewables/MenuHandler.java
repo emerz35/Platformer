@@ -22,6 +22,10 @@ public class MenuHandler extends MouseAdapter{
     public void mouseClicked(MouseEvent e){
         currentViewables.getLast().onClick(e.getX(),e.getY());
     }
+    @Override
+    public void mousePressed(MouseEvent e){
+        currentViewables.getLast().mouseDown(e.getX(), e.getY());
+    }
     public void addViewable(Viewable viewable){
         currentViewables.add(viewable);
     }

@@ -28,6 +28,23 @@ public abstract class GameObject{
     private Weapon weapon;
     private Armour armour;
     private float health;
+    private int invinc = 0;
+    private Direction direction = Direction.stationary;
+    private Direction facing = Direction.right;
+    
+    public enum Direction{
+        left(-1),
+        right(1),
+        stationary(0);
+        private final float multiplier;
+        private Direction(float multiplier){
+            this.multiplier = multiplier;
+        }
+        public float getMultiplier(){
+            return multiplier;
+        }
+    }
+    
     public GameObject(float x, float y, float width, float height, float health, Color color, Collision c, MovementBehaviour mb, Stage s, Weapon weapon, Armour armour){
         this.color = color;
         this.collision = c;
@@ -53,7 +70,8 @@ public abstract class GameObject{
         this.health = health;
         this.armour = armour;
         this.weapon = weapon;
-    }public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s){
+    }
+    public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s){
         this.x = x;
         this.y = y;
         this.width = width;
@@ -158,5 +176,52 @@ public abstract class GameObject{
     }
     public float getHeight(){
         return this.height;
+    }
+    public int getInvinc(){
+        return invinc;
+    }
+    public void setInvincTo(int invinc){
+        this.invinc = invinc;
+    }
+    public void setInvinc(){
+        this.invinc = 60;
+    }
+    public void reduceInvinc(){
+        invinc--;
+    }
+    public Direction getDirection(){
+        return this.direction;
+    }
+    public void swapDirections(){
+        if(direction != Direction.stationary) direction = direction == Direction.left ? Direction.right:Direction.left;
+    }
+    public void stopObject(){
+        direction = Direction.stationary;
+    }
+    public void setDirection(String direction){
+        switch(direction.toLowerCase()){
+            case "left": this.direction = Direction.left;
+                        break;
+            case "right": this.direction = Direction.right;
+                        break;
+            default: this.direction = Direction.stationary;
+        }
+    }
+    public void setDirection(Direction direction){
+        this.direction = direction;
+    }
+    public void setFacing(String direction){
+        switch(direction.toLowerCase()){
+            case "left": this.facing = Direction.left;
+                        break;
+            case "right": this.facing = Direction.right;
+                        break;
+        }
+    }
+    public void setFacing(Direction direction){
+        this.facing = direction;
+    }
+    public Direction getFacing(){
+        return this.facing;
     }
 }
