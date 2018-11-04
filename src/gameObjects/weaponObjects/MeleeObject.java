@@ -33,16 +33,15 @@ public class MeleeObject extends GameObject{
         else x = player.getX() + player.getWidth()/2 - getWidth()/2;
         y = player.getY();
     }
-    @Override
-    public void render(Graphics g){
-
-    }
+    /*@Override
+    public void render(Graphics g){}*/
 
     @Override
     public void collision(GameObject o) {
         if(o instanceof Enemy && attackFrames > 0 && o.getInvinc() <=0){
             new AttackEvent(player,o).attackEvent();
             o.setInvinc();
+            o.setVelX(o.getVelX()+100*player.getFacing().getMultiplier());
         }
     }
     public void attack(){

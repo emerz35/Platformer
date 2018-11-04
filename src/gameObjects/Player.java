@@ -5,7 +5,6 @@ import items.armour.LeatherArmour;
 import items.weapons.Sword;
 import java.awt.Color;
 import platformer.AttackEvent;
-import platformer.Platformer;
 import stages.Stage;
 
 /**
@@ -21,16 +20,16 @@ public class Player extends GameObject{
         movement.tick(this);
         velx = xisFree(velx);
         vely = yisFree(vely);
-        x += velx;
-        y += vely;
-        y = Platformer.clamp(y,0,420);
-        if(y==420) {
-            vely = 0;
-            jumps = 2;
-        }
+        //200,200,500,280   
+        if((x>500&& velx>0)||(x<200 && velx<0))getStage().changeX(-velx);
+        else x += velx;
+        if((y>280&& vely>0)||(y<200 && vely<0))getStage().changeY(-vely);
+        else y += vely;
+       
         if(getInvinc() > 0) reduceInvinc();
         collision.setX(x);
         collision.setY(y);
+        
     }
     @Override 
     public void collision(GameObject o){

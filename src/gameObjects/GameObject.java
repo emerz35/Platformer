@@ -58,6 +58,17 @@ public abstract class GameObject{
         this.armour = armour;
         this.weapon = weapon;
     } 
+    public GameObject(float x, float y, float width, float height, float health, Color color, Collision c, MovementBehaviour mb, Stage s){
+        this.color = color;
+        this.collision = c;
+        this.movement = mb;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.stage = s;
+        this.health = health;
+    } 
     public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s, Weapon weapon, Armour armour){
         this.x = x;
         this.y = y;
@@ -95,7 +106,8 @@ public abstract class GameObject{
         this.armour = armour;
     }
     public void render(Graphics g){
-        g.setColor(color);
+        if(invinc%10>5)g.setColor(Color.white);
+        else g.setColor(color);
         g.fillRect((int)x,(int) y, (int) width, (int) height);
     } 
     public void changeHealth(float change){
@@ -170,6 +182,9 @@ public abstract class GameObject{
     }
     public void setStage(Stage stage){
         this.stage = stage;
+    }
+    public Stage getStage(){
+        return this.stage;
     }
     public float getWidth(){
         return this.width;

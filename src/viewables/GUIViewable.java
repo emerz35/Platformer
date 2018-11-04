@@ -2,6 +2,7 @@ package viewables;
 
 import gameObjects.Player;
 import gameObjects.weaponObjects.MeleeObject;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -12,6 +13,7 @@ import java.awt.Graphics;
 public class GUIViewable implements Viewable{
     private final Player player;
     private final MeleeObject o;
+    private Button b = new Button();
     public GUIViewable(Player player,MeleeObject o){
         this.player = player;
         this.o = o;

@@ -7,11 +7,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import gameObjects.Player;
 import gameObjects.Platform;
-import gameObjects.behaviours.LineMovementBehaviour;
 import gameObjects.behaviours.NoMovementBehaviour;
+import gameObjects.behaviours.OnPlatformMovementBehaviour;
 import gameObjects.behaviours.PlayerMovementBehaviour;
 import gameObjects.weaponObjects.MeleeObject;
-import geometry.LineFunction;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import stages.Stage;
 import viewables.GUIViewable;
 import viewables.MenuHandler;
@@ -35,11 +36,23 @@ public class Platformer extends Canvas implements Runnable{
         handler = new Handler();
         currentStage = new Stage();
         menuHandler = new MenuHandler();
-        Platform platform = new Platform(320,200,200,10,currentStage);
+        Platform platform = new Platform(320,200,500,10,currentStage);
         Platform platform2 = new Platform(120,250,100,10,currentStage);
         PlayerMovementBehaviour pmb = new PlayerMovementBehaviour();
-        this.player = new Player(100,100, pmb,currentStage);
-        Enemy e = new Enemy(100,100,32,32,32,Color.red, new LineMovementBehaviour(new LineFunction(0,50,new float[]{0,500},new float[]{-1,200}),2)/*new NoMovementBehaviour()*/,currentStage);
+        this.player = new Player(200,200, pmb,currentStage);
+        addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyChar() == 'e'){
+                    Enemy enemy = new Enemy(140,100,24,24,32,Color.red, new OnPlatformMovementBehaviour(platform,2),currentStage);
+                    handler.addObject(enemy);
+                    currentStage.addObject(enemy);
+                }
+            }
+        });
+        Enemy e = new Enemy(140,100,26,26,32,Color.red, new OnPlatformMovementBehaviour(platform,2),currentStage);
+        e.setDirection("left");
+        //Enemy e = new Enemy(100,100,32,32,32,Color.red, new LineMovementBehaviour(new LineFunction(0,50,new float[]{0,500},new float[]{-1,200}),2)/*new NoMovementBehaviour()*/,currentStage);
         addKeyListener(pmb); 
         addMouseListener(menuHandler);
         currentStage.addObject(this.player);
@@ -50,7 +63,7 @@ public class Platformer extends Canvas implements Runnable{
         handler.addObject(platform);
         handler.addObject(platform2);
         handler.addObject(e);
-        MeleeObject o = new MeleeObject(1,1,15,32,0,null,new NoMovementBehaviour(),null, player);
+        MeleeObject o = new MeleeObject(1,1,32,32,0,null,new NoMovementBehaviour(),null, player);
         currentStage.addObject(o);
         handler.addObject(o);
         menuHandler.addViewable(new GUIViewable(player,o));

@@ -1,6 +1,7 @@
 package stages;
 
 import gameObjects.GameObject;
+import gameObjects.Player;
 import java.awt.Image;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,9 +47,9 @@ public class Stage {
         o.remove();
     }
     public void changeY(float dy){
-        objects.forEach(x -> x.setY(x.getY() + dy));
+        objects.stream().filter(x -> !(x instanceof Player)).forEach(x -> x.setY(x.getY() + dy));
     }
     public void changeX(float dx){
-        objects.forEach(x -> x.setX(x.getX() + dx));
+        objects.stream().filter(x -> !(x instanceof Player)).forEach(x -> x.setX(x.getX() + dx));
     }
 }

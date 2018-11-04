@@ -1,5 +1,6 @@
 package platformer;
 
+import java.awt.Button;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -19,6 +20,5 @@ public class Window{
         frame.add(game);
         frame.setVisible(true);
         game.start();
-        
     }
 }

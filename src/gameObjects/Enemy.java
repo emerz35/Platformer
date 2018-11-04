@@ -18,6 +18,8 @@ public class Enemy extends GameObject{
 
     @Override
     public void tick() {
+        velx = xisFree(velx);
+        vely = yisFree(vely);
         x += velx;
         y += vely;
         movement.tick(this);
