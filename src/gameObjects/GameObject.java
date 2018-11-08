@@ -1,5 +1,6 @@
 package gameObjects;
 
+import buffs.Effect;
 import gameObjects.behaviours.MovementBehaviour;
 import items.Item;
 import items.armour.Armour;
@@ -7,6 +8,8 @@ import items.weapons.Weapon;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.LinkedList;
+import java.util.List;
 import platformer.AttackEvent;
 import platformer.Storage;
 import stages.Stage;
@@ -31,6 +34,7 @@ public abstract class GameObject{
     private int invinc = 0;
     private Direction direction = Direction.stationary;
     private Direction facing = Direction.right;
+    private final List<Effect> effects = new LinkedList<>();
     
     public enum Direction{
         left(-1),
@@ -45,7 +49,7 @@ public abstract class GameObject{
         }
     }
     
-    public GameObject(float x, float y, float width, float height, float health, Color color, Collision c, MovementBehaviour mb, Stage s, Weapon weapon, Armour armour){
+    public GameObject(float x, float y, float width, float height, float health, Color color, Collision c, MovementBehaviour mb, Stage s, Weapon weapon, Armour armour, Direction direction){
         this.color = color;
         this.collision = c;
         this.movement = mb;
@@ -57,6 +61,7 @@ public abstract class GameObject{
         this.health = health;
         this.armour = armour;
         this.weapon = weapon;
+        this.direction = direction;
     } 
     public GameObject(float x, float y, float width, float height, float health, Color color, Collision c, MovementBehaviour mb, Stage s){
         this.color = color;
@@ -69,7 +74,7 @@ public abstract class GameObject{
         this.stage = s;
         this.health = health;
     } 
-    public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s, Weapon weapon, Armour armour){
+    public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s, Weapon weapon, Armour armour, Direction direction){
         this.x = x;
         this.y = y;
         this.width = width;
@@ -81,6 +86,7 @@ public abstract class GameObject{
         this.health = health;
         this.armour = armour;
         this.weapon = weapon;
+        this.direction = direction;
     }
     public GameObject(float x, float y, float width, float height,float health, Color color, MovementBehaviour mb, Stage s){
         this.x = x;
@@ -135,6 +141,7 @@ public abstract class GameObject{
         return velx;
     }
     public void setVelX(float velx){
+        
         this.velx = velx;
     }
     public float getVelY(){
@@ -239,4 +246,23 @@ public abstract class GameObject{
     public Direction getFacing(){
         return this.facing;
     }
-}
+    
+    public List<Effect> getEffects(){
+        return effects;
+    }
+    public void addEffect(Effect e){
+        effects.add(e);
+    }
+    public void removeEffect(Effect e){
+        effects.remove(e);
+    }
+    public Storage<Item> getItems(){
+        return this.items;
+    }
+    public void addItem(Item i){
+        items.add(i);
+    }
+    public void removeItem(Item i){
+        items.remove(i);
+    }
+}   

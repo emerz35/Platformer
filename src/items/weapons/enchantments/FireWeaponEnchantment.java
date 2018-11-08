@@ -1,5 +1,6 @@
 package items.weapons.enchantments;
 
+import buffs.FireEffect;
 import gameObjects.GameObject;
 import items.weapons.Weapon;
 import platformer.AttackEvent;
@@ -10,14 +11,12 @@ import platformer.AttackEvent;
  */
 public class FireWeaponEnchantment implements Weapon{
     private final Weapon weapon;
-    private final GameObject user;
-    public FireWeaponEnchantment(Weapon w, GameObject user){
+    public FireWeaponEnchantment(Weapon w){
         this.weapon = w;
-        this.user = user;
     }
     @Override
     public float attack(AttackEvent e) {
-        //Add fire debuff to e.getDefender()
+        e.getDefender().addEffect(new FireEffect());
         return weapon.attack(e);
     }
 
