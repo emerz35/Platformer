@@ -1,5 +1,6 @@
 package items.weapons;
 
+import gameObjects.GameObject;
 import platformer.AttackEvent;
 
 /**
@@ -21,5 +22,4 @@ public class Sword implements Weapon{
     public void render(float x, float y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

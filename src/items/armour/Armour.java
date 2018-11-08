@@ -1,5 +1,6 @@
 package items.armour;
 
+import gameObjects.GameObject;
 import items.Item;
 import platformer.AttackEvent;
 
@@ -9,4 +10,10 @@ import platformer.AttackEvent;
  */
 public interface Armour extends Item{
     public void defend(AttackEvent e, float damage);
+    
+    @Override
+    public default void useorequip(GameObject o){
+        o.equipArmour(this);
+        o.removeItem(this);
+    }
 }

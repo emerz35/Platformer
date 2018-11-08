@@ -22,4 +22,9 @@ public class FireEffect implements Effect{
     public void reduceTime() {
         timer --;
     }
+
+    @Override
+    public String getName() {
+        return "on fire";
+    }
 }
