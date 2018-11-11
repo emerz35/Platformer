@@ -1,4 +1,4 @@
-package buffs;
+package effects;
 
 import gameObjects.GameObject;
 

@@ -1,4 +1,4 @@
-package buffs;
+package effects;
 
 import gameObjects.GameObject;
 
@@ -10,8 +10,7 @@ public class FireEffect implements Effect{
     private int timer = 300;
     @Override
     public void tick(GameObject o) {
-        if(timer <=0)o.removeEffect(this);
-        o.changeHealth(-0.02f);
+        o.changeHealth(-0.05f);
         timer--;
     }  
 

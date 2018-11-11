@@ -1,6 +1,6 @@
 package items.weapons.enchantments;
 
-import buffs.FireEffect;
+import effects.FireEffect;
 import gameObjects.GameObject;
 import items.weapons.Weapon;
 import platformer.AttackEvent;

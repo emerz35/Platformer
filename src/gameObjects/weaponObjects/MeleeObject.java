@@ -28,6 +28,7 @@ public class MeleeObject extends GameObject{
         collision.setY(y);
         if(attackFrames > 0) {
             x = player.getX() - getWidth()/2 + player.getWidth()/2 + player.getWidth()/2 * player.getFacing().getMultiplier();
+            setFacing(player.getFacing());
             attackFrames--;
         }
         else x = player.getX() + player.getWidth()/2 - getWidth()/2;
@@ -41,7 +42,8 @@ public class MeleeObject extends GameObject{
         if(o instanceof Enemy && attackFrames > 0 && o.getInvinc() <=0){
             new AttackEvent(player,o).attackEvent();
             o.setInvinc();
-            o.setVelX(o.getVelX() + 20*player.getFacing().getMultiplier()*o.getDirection().getMultiplier());
+            o.setVelX(o.getVelX() + 25*getFacing().getMultiplier()*o.getDirection().getMultiplier());
+            o.setVelY(-5);
         }
     }
     public void attack(){

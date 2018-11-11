@@ -11,5 +11,4 @@ public interface Viewable {
     public void highlight(int mx, int my);
     public void render(Graphics g);
     public void mouseDown(int mx, int my);
-
 }

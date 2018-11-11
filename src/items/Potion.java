@@ -1,6 +1,6 @@
 package items;
 
-import buffs.Effect;
+import effects.Effect;
 import gameObjects.GameObject;
 
 /**

@@ -30,6 +30,7 @@ public class Player extends GameObject{
         if(getInvinc() > 0) reduceInvinc();
         collision.setX(x);
         collision.setY(y);
+        getEffects().removeIf(e -> e.getTime() <= 0);
         getEffects().forEach(e -> e.tick(this));
     }
     @Override 

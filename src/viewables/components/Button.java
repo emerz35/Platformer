@@ -10,15 +10,15 @@ import java.awt.Graphics;
 public class Button {
     private float x,y,width,height;
     private final Color colour, onHover;
-    private String id;
-    public Button(String id,float x, float y, float width, float height, Color colour, Color onHover){
-        this.id = id;
+    private final Action onClick;
+    public Button(float x, float y, float width, float height, Color colour, Color onHover, Action onClick){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.colour = colour;
         this.onHover = onHover;
+        this.onClick = onClick;
     }
     public float getX(){
         return x;
@@ -34,8 +34,12 @@ public class Button {
     }
     public void render(Graphics g){
         g.setColor(colour);
+        g.fill3DRect((int)x, (int)y, (int)width, (int)height, true);
     }
-    public String getID(){
-    return this.id;
+    public void onClick(){
+        onClick.action();
+    }
+    public boolean withinBounds(int mx, int my){
+        return mx >= x - width && mx <=x + width && my >= y - height && my <= y + height;
     }
 }

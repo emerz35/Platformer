@@ -15,6 +15,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import stages.Stage;
 import viewables.GUIViewable;
+import viewables.InventoryViewable;
 import viewables.MenuHandler;
 
 /**
@@ -32,6 +33,7 @@ public class Platformer extends Canvas implements Runnable{
     private Stage currentStage;
     private final MenuHandler menuHandler;
     public Platformer(){
+        requestFocus();
         window = new Window("Platformer", width, height, this);
         handler = new Handler();
         currentStage = new Stage();
@@ -66,7 +68,8 @@ public class Platformer extends Canvas implements Runnable{
         MeleeObject o = new MeleeObject(1,1,32,32,0,null,new NoMovementBehaviour(),null, player);
         currentStage.addObject(o);
         handler.addObject(o);
-        menuHandler.addViewable(new GUIViewable(player,o));
+        menuHandler.addViewable(new GUIViewable(player,o, menuHandler));
+        menuHandler.addViewable(new InventoryViewable(player.getItems(),menuHandler));
     }
     /**
      * @param args the command line arguments
@@ -118,7 +121,7 @@ public class Platformer extends Canvas implements Runnable{
         stop();	
     }
     private void tick(){
-        currentStage.tick();
+        if(menuHandler.getTopViewable() instanceof GUIViewable)currentStage.tick();
     }
     private void render(){
         BufferStrategy bs = this.getBufferStrategy();

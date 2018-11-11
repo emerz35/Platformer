@@ -1,6 +1,6 @@
 package gameObjects;
 
-import buffs.Effect;
+import effects.Effect;
 import gameObjects.behaviours.MovementBehaviour;
 import items.Item;
 import items.armour.Armour;

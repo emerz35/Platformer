@@ -35,4 +35,7 @@ public class MenuHandler extends MouseAdapter{
     public void render(Graphics g){
         currentViewables.forEach(x -> x.render(g));
     }
+    public Viewable getTopViewable(){
+        return currentViewables.isEmpty() ? null:currentViewables.getLast();
+    }
 }
