@@ -16,7 +16,7 @@ public class GUIViewable implements Viewable{
     private final MeleeObject o;
     private final Button b;
     public GUIViewable(Player player,MeleeObject o, MenuHandler mh){
-        this.b = new Button(0,0,200,100,Color.GRAY,Color.YELLOW, ()->{mh.addViewable(new InventoryViewable(player.getItems(),mh));});
+        this.b = new Button("",10,390,50,50,Color.GRAY,Color.YELLOW, ()->{mh.addViewable(new InventoryViewable(player,mh));});
         this.player = player;
         this.o = o;
         
@@ -36,7 +36,7 @@ public class GUIViewable implements Viewable{
         g.fillRect(10, 10, 100, 20);
         g.setColor(Color.green);
         g.fillRect(10,10,(int)player.getHealth(),20);
-        //b.render(g);
+        b.render(g);
     }
 
     @Override

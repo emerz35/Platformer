@@ -2,6 +2,7 @@ package items;
 
 import effects.Effect;
 import gameObjects.GameObject;
+import java.awt.Graphics;
 
 /**
  *
@@ -22,8 +23,8 @@ public class Potion implements Item, Stackable{
     }
 
     @Override
-    public void render(float x, float y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void render(float x, float y,Graphics g) {
+        
     }
 
     @Override

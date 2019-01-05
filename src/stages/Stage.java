@@ -52,4 +52,7 @@ public class Stage {
     public void changeX(float dx){
         objects.stream().filter(x -> !(x instanceof Player)).forEach(x -> x.setX(x.getX() + dx));
     }
+    public Image getImage(){
+        return background;
+    }
 }

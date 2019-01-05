@@ -1,8 +1,9 @@
 package items.weapons.enchantments;
 
 import effects.FireEffect;
-import gameObjects.GameObject;
 import items.weapons.Weapon;
+import java.awt.Color;
+import java.awt.Graphics;
 import platformer.AttackEvent;
 
 /**
@@ -26,7 +27,9 @@ public class FireWeaponEnchantment implements Weapon{
     }
 
     @Override
-    public void render(float x, float y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void render(float x, float y,Graphics g) {
+        weapon.render(x,y,g);
+        g.setColor(Color.blue);
+        g.fillRect((int)x+2,(int)y+2,65,65);
     }
 }

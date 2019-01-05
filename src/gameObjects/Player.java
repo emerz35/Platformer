@@ -3,6 +3,7 @@ package gameObjects;
 import gameObjects.behaviours.MovementBehaviour;
 import items.armour.LeatherArmour;
 import items.weapons.Sword;
+import items.weapons.enchantments.FireWeaponEnchantment;
 import java.awt.Color;
 import platformer.AttackEvent;
 import stages.Stage;
@@ -14,11 +15,13 @@ import stages.Stage;
 public class Player extends GameObject{
     public Player(float x, float y, MovementBehaviour m, Stage s){
         super(x,y,32,32,100,Color.black,m,s, new Sword(), new LeatherArmour(),Direction.stationary);
+        velx = 5;
+        addItem(new FireWeaponEnchantment(new Sword()));
     }
     @Override
     public void tick(){
         movement.tick(this);
-        velx = Math.abs(xisFree(velx*getDirection().getMultiplier()));
+        velx = Math.abs(xisFree(velx*getFacing().getMultiplier()));
         vely = yisFree(vely);
         //200,200,500,280   
         if((x>500&& getDirection() == Direction.right)||(x<200 && getDirection()== Direction.left))getStage().changeX(-velx*getDirection().getMultiplier());
@@ -33,7 +36,7 @@ public class Player extends GameObject{
         getEffects().removeIf(e -> e.getTime() <= 0);
         getEffects().forEach(e -> e.tick(this));
     }
-    @Override 
+    @Override
     public void collision(GameObject o){
         if(o instanceof Enemy && getInvinc() <= 0){ 
             new AttackEvent(o,this).attackEvent();

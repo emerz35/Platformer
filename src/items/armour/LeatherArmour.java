@@ -1,6 +1,7 @@
 package items.armour;
 
 import gameObjects.GameObject;
+import java.awt.Graphics;
 import platformer.AttackEvent;
 
 /**
@@ -20,14 +21,8 @@ public class LeatherArmour implements Armour{
     }
 
     @Override
-    public void render(float x, float y) {
+    public void render(float x, float y,Graphics g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void useorequip(GameObject o) {
-        o.equipArmour(this);
-        o.removeItem(this);
     }
     
 }

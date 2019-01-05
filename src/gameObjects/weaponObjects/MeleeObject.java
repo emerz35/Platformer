@@ -47,7 +47,7 @@ public class MeleeObject extends GameObject{
         }
     }
     public void attack(){
-        this.attackFrames = 20;
+        this.attackFrames = 10;
     }
     
 }

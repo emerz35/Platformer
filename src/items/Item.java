@@ -1,6 +1,7 @@
 package items;
 
 import gameObjects.GameObject;
+import java.awt.Graphics;
 
 /**
  *
@@ -8,6 +9,6 @@ import gameObjects.GameObject;
  */
 public interface Item {
     public String getName();
-    public void render(float x, float y);
+    public void render(float x, float y, Graphics g);
     public void useorequip(GameObject o);
 }

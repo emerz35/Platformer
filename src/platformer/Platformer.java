@@ -1,5 +1,7 @@
 package platformer;
 
+import abilities.AbilityHandler;
+import abilities.DashAbility;
 import gameObjects.Enemy;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -15,7 +17,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import stages.Stage;
 import viewables.GUIViewable;
-import viewables.InventoryViewable;
+import viewables.GameOverViewable;
 import viewables.MenuHandler;
 
 /**
@@ -29,9 +31,10 @@ public class Platformer extends Canvas implements Runnable{
     private final Handler handler;
     private final int width = 800, height = 480;
     public static final float GRAVITY = 1f;
-    private final Player player;
+    private static Player player;
     private Stage currentStage;
     private final MenuHandler menuHandler;
+    private final AbilityHandler abilityHandler;
     public Platformer(){
         requestFocus();
         window = new Window("Platformer", width, height, this);
@@ -41,7 +44,9 @@ public class Platformer extends Canvas implements Runnable{
         Platform platform = new Platform(320,200,500,10,currentStage);
         Platform platform2 = new Platform(120,250,100,10,currentStage);
         PlayerMovementBehaviour pmb = new PlayerMovementBehaviour();
-        this.player = new Player(200,200, pmb,currentStage);
+        player = new Player(200,200, pmb,currentStage);
+        abilityHandler = new AbilityHandler(new DashAbility(player));
+        addKeyListener(abilityHandler);
         addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e){
@@ -65,11 +70,12 @@ public class Platformer extends Canvas implements Runnable{
         handler.addObject(platform);
         handler.addObject(platform2);
         handler.addObject(e);
-        MeleeObject o = new MeleeObject(1,1,32,32,0,null,new NoMovementBehaviour(),null, player);
+        MeleeObject o = new MeleeObject(1,1,25,32,0,null,new NoMovementBehaviour(),null, player);
         currentStage.addObject(o);
         handler.addObject(o);
         menuHandler.addViewable(new GUIViewable(player,o, menuHandler));
-        menuHandler.addViewable(new InventoryViewable(player.getItems(),menuHandler));
+        //menuHandler.addViewable(new InventoryViewable(player.getItems(),menuHandler));
+        menuHandler.addViewable(new GameOverViewable(menuHandler));
     }
     /**
      * @param args the command line arguments
@@ -143,8 +149,8 @@ public class Platformer extends Canvas implements Runnable{
         if(var <= min) return min;
         return var;
     }
-    public Player getPlayer(){
-        return this.player;
+    public static Player getPlayer(){
+        return player;
     }
     public void setStage(Stage stage){
         this.currentStage = stage;

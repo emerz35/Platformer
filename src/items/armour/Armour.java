@@ -13,7 +13,8 @@ public interface Armour extends Item{
     
     @Override
     public default void useorequip(GameObject o){
-        o.equipArmour(this);
+        Armour old = o.equipArmour(this);
         o.removeItem(this);
+        o.addItem(old);
     }
 }

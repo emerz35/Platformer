@@ -1,6 +1,7 @@
 package items.weapons;
 
-import gameObjects.GameObject;
+import java.awt.Color;
+import java.awt.Graphics;
 import platformer.AttackEvent;
 
 /**
@@ -19,7 +20,8 @@ public class Sword implements Weapon{
     }
 
     @Override
-    public void render(float x, float y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void render(float x, float y,Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fillRect((int)x,(int)y,70,70);
     }
 }

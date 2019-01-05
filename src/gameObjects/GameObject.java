@@ -1,6 +1,8 @@
 package gameObjects;
 
 import effects.Effect;
+import exceptions.StorageFullException;
+import gameObjects.animations.Animator;
 import gameObjects.behaviours.MovementBehaviour;
 import items.Item;
 import items.armour.Armour;
@@ -8,6 +10,7 @@ import items.weapons.Weapon;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import platformer.AttackEvent;
@@ -18,7 +21,7 @@ import stages.Stage;
  *
  * @author Charlie Hands
  */
-public abstract class GameObject{
+public abstract class GameObject implements Serializable{
     protected float velx = 0, vely = 0,x,y,width,height;
     protected final Collision collision;
     private boolean alive = true;
@@ -27,7 +30,7 @@ public abstract class GameObject{
     protected MovementBehaviour movement;
     private Stage stage;
     public int jumps = 2;
-    private final Storage<Item> items = new Storage();
+    private final Storage<Item> items = new Storage(20);
     private Weapon weapon;
     private Armour armour;
     private float health;
@@ -35,6 +38,7 @@ public abstract class GameObject{
     private Direction direction = Direction.stationary;
     private Direction facing = Direction.right;
     private final List<Effect> effects = new LinkedList<>();
+    private Animator animation;
     
     public enum Direction{
         left(-1),
@@ -105,11 +109,21 @@ public abstract class GameObject{
     public float attack(AttackEvent e){
         return weapon.attack(e);
     }
-    public void equipWeapon(Weapon weapon){
+    public Weapon equipWeapon(Weapon weapon){
+        Weapon old = this.weapon;
         this.weapon = weapon;
+        return old;
     }
-    public void equipArmour(Armour armour){
+    public Weapon getWeapon(){
+        return weapon;
+    }
+    public Armour equipArmour(Armour armour){
+        Armour old = this.armour;  
         this.armour = armour;
+        return old;
+    }
+    public Armour getArmour(){
+        return armour;
     }
     public void render(Graphics g){
         if(invinc%10>5)g.setColor(Color.white);
@@ -260,9 +274,16 @@ public abstract class GameObject{
         return this.items;
     }
     public void addItem(Item i){
-        items.add(i);
+        try{
+            items.add(i);
+        }catch(StorageFullException e){
+            
+        }
     }
     public void removeItem(Item i){
         items.remove(i);
     }
+    public void setAnimation(Animator animation){
+        this.animation = animation;
+    } 
 }   
