@@ -1,7 +1,6 @@
 package viewables;
 
 import gameObjects.GameObject;
-import items.Item;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -17,28 +16,25 @@ public class InventoryViewable implements Viewable{
     private final GameObject player;
     private final MenuHandler menuHandler;
     private final List<Button> buttons = new LinkedList<>();
+    private final ItemAction purpose;
     
     public InventoryViewable(GameObject player, MenuHandler mh){
         this.player = player;
         this.menuHandler = mh;
-        for(int i = 0;i < player.getItems().getItems().size();i++){
-            final Item item = player.getItems().getItems().get(i);
-            buttons.add(new Button("",200 + (i % 5) * 75,110 + i/5 * 75, 70, 70,Color.LIGHT_GRAY,Color.LIGHT_GRAY,()->{item.useorequip(this.player);}));
+        for(int i = 0;i < player.getItems().getCapacity();i++){
+            final int j = i;
+            buttons.add(new Button("",200 + (i % 5) * 75,110 + i/5 * 75, 70, 70,Color.LIGHT_GRAY,Color.LIGHT_GRAY,()->itemClick(j)));
         }
-        for(int i = player.getItems().getItems().size();i<player.getItems().getCapacity();i++){
-            buttons.add(new Button("",200 + (i % 5) * 75,110 + i/5 * 75, 70, 70,Color.LIGHT_GRAY,Color.LIGHT_GRAY,()->{}));
-        }
+        this.purpose = x->{x.useorequip(player);};
     }
     public InventoryViewable(GameObject player, MenuHandler mh, ItemAction purpose){
         this.player = player;
         this.menuHandler = mh;
-        for(int i = 0;i < player.getItems().getItems().size();i++){
-            final Item item = player.getItems().getItems().get(i);
-            buttons.add(new Button("",200 + (i % 5) * 75,110 + i/5 * 75, 70, 70,Color.LIGHT_GRAY,Color.LIGHT_GRAY,()->{purpose.action(item);}));
+        for(int i = 0;i < player.getItems().getCapacity();i++){
+            final int j = i;
+            buttons.add(new Button("",200 + (i % 5) * 75,110 + i/5 * 75, 70, 70,Color.LIGHT_GRAY,Color.LIGHT_GRAY,()->itemClick(j)));
         }
-        for(int i = player.getItems().getItems().size();i<player.getItems().getCapacity();i++){
-            buttons.add(new Button("",200 + (i % 5) * 75,110 + i/5 * 75, 70, 70,Color.LIGHT_GRAY,Color.LIGHT_GRAY,()->{}));
-        }
+        this.purpose = purpose;
     }
     @Override
     public void onClick(int mx, int my) {
@@ -73,5 +69,7 @@ public class InventoryViewable implements Viewable{
     @Override
     public void mouseDown(int mx, int my) {
     }
-    
+    public final void itemClick(int i){
+        if(player.getItems().getItems().size()>i)purpose.action(player.getItems().getItems().get(i));
+    }
 }

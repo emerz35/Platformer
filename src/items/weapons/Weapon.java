@@ -16,6 +16,5 @@ public interface Weapon extends Item{
         Weapon old = o.equipWeapon(this);
         o.removeItem(this);
         o.addItem(old);
-        System.out.println("ok");
     }
 }
